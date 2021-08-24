@@ -25,14 +25,17 @@ module xcelite_99_blade_socket(
 }
 
 module xcelite_99_blade_case(
-	no_blades = no_blades_def,
+	no_blades = no_blades,
 	// Increase for tools with heads bigger than the handle's socket.
-	tool_spacing = tool_spacing_def,
+	tool_spacing_x = tool_spacing_x,
+	tool_spacing_y = tool_spacing_y,
+	// Increase for small values of tool_spacing_*
+	outside_pad = outside_pad,
 	wall_z = wall_thickness,
 	cap_inset_depth = cap_thickness + cap_clearance,
 	cap_inset_height = cap_overlap,
 
-	blade_base_dia = blade_base_dia_def,
+	blade_base_dia = blade_base_dia,
 	/*
 	 * wingspan: max distance from one wing's outer surface to the other:
 	 *
@@ -41,19 +44,22 @@ module xcelite_99_blade_case(
 	 * |___  |  _______--------
 	 *     \_v_/
 	 */
-	blade_wingspan = blade_wingspan_def,
-	blade_wing_thickness = blade_wing_thickness_def,
+	blade_wingspan = blade_wingspan,
+	blade_wing_thickness = blade_wing_thickness,
 	// 0 is wingtip-to-wingtip, 90 is flat-to-flat.
-	blade_angle = blade_angle_def,
-	socket_depth = socket_depth_def,
+	blade_angle = blade_angle,
+	socket_depth = socket_depth,
 	socket_clearance = 0.006,
 	followthrough = 0.01
 )
 {
 	slop = 2 * socket_clearance;
-	swidth = socket_width(blade_base_dia, blade_wingspan, blade_angle) + slop;
-	sheight = socket_height(blade_base_dia, blade_wingspan, blade_angle) + slop;
-	bottom_sidewall = tool_spacing + cap_inset_depth;
+	swidth = socket_width(blade_base_dia, blade_wingspan, blade_wing_thickness, blade_angle) + slop;
+	sheight = socket_height(blade_base_dia, blade_wingspan, blade_wing_thickness, blade_angle) + slop;
+	sidewall_x = max(tool_spacing_x, outside_pad);
+	sidewall_y = max(tool_spacing_y, outside_pad);
+	bottom_sidewall_x = sidewall_x + cap_inset_depth;
+	bottom_sidewall_y = sidewall_y + cap_inset_depth;
 
 	difference()
 	{
@@ -68,25 +74,29 @@ module xcelite_99_blade_case(
 				])
 				{
 					cube([
-						(swidth + tool_spacing) * no_blades + tool_spacing,
-						sheight + 2 * tool_spacing,
+						swidth * no_blades + (no_blades - 1) * tool_spacing_x + 2 * sidewall_x,
+						sheight + 2 * sidewall_y,
 						cap_inset_height + followthrough
 					]);
 				}
 			}
 			cube([
-				swidth * no_blades + tool_spacing * (no_blades - 1) + 2 * bottom_sidewall,
-				sheight + 2 * bottom_sidewall,
+				swidth * no_blades + tool_spacing_x * (no_blades - 1) + 2 * bottom_sidewall_x,
+				sheight + 2 * bottom_sidewall_y,
 				socket_depth + wall_z - cap_inset_height
 			]);
 		}
 		union()
 		{
-			for (offs = [bottom_sidewall + swidth / 2 : swidth + tool_spacing : bottom_sidewall + no_blades * (swidth + tool_spacing)])
+			for (offs = [
+				bottom_sidewall_x + swidth / 2 :
+				swidth + tool_spacing_x :
+				bottom_sidewall_x + no_blades * (swidth + tool_spacing_x)
+			])
 			{
 				translate([
 					offs,
-					bottom_sidewall + sheight / 2,
+					bottom_sidewall_y + sheight / 2,
 					wall_z
 				])
 				{
