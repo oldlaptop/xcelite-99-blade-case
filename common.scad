@@ -22,11 +22,11 @@ outside_pad = wall_thickness;
 // Single perimeter with a 0.4mm nozzle, for vase mode
 // cap_thickness = 0.45 / mm_per_inch;
 cap_thickness = 0.075;
-cap_clearance = 0.004;
+cap_clearance = 0.003;
 cap_overlap = 1;
 solid_cap = 0;
 
-socket_clearance = 0.006;
+socket_clearance = 0.007;
 socket_depth = 1.5;
 
 function socket_width(blade_base_dia, blade_wingspan, blade_wing_thickness, blade_angle)
