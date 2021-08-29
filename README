@@ -1,0 +1,19 @@
+This is a parameterized holder for Xcelite series 99 interchangeable screwdriver
+blades (though I've only tested it on my Jensen/Techni-Tool knockoffs). It's
+designed to take up a minimum of space and only hold the actual blades; it is
+assumed you already have a nice spot for the handles and just need to keep some
+extra blades organized.
+
+Such things as the number of blades the model will hold are parameterized; you
+can either change parameters manually (read common.scad first) or generate files
+with your desired values with the included Makefile. Try the `help` target
+first:
+
+$ make help
+
+Example for twelve blades, with extra clearance for large nut drivers (up to
+a quarter inch larger diameter than the blade's shaft):
+
+$ make models previews OPENSCAD_FLAGS='-D no_blades=12 \
+                                       -D tool_spacing_x=0.125 \
+                                       -D tool_spacing_y=0.125'
