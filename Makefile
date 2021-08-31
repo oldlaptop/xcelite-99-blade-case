@@ -36,3 +36,10 @@ help:
 	@echo "                            printing in vase mode on FDM machines"
 	@echo "    -D cutaway_x=true:      assembly.png will have the right half cut away"
 	@echo "    -D cutaway_y=true:      assembly.png will have the front half cut away"
+
+xcelite-99-blade-case.scad: common.scad
+	touch $@
+xcelite-99-blade-case-cap.scad: common.scad
+	touch $@
+assembly.scad: common.scad
+	touch $@
