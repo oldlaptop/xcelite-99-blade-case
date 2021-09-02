@@ -15,5 +15,5 @@ Example for twelve blades, with extra clearance for large nut drivers (up to
 a quarter inch larger diameter than the blade's shaft):
 
 $ make models previews OPENSCAD_FLAGS='-D no_blades=12 \
-                                       -D tool_spacing_x=0.125 \
+                                       -D tool_spacing_x=0.25 \
                                        -D tool_spacing_y=0.125'
