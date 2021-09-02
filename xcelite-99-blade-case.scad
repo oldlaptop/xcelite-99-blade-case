@@ -65,7 +65,7 @@ module xcelite_99_blade_case(
 	// 0 is wingtip-to-wingtip, 90 is flat-to-flat.
 	blade_angle = blade_angle,
 	socket_depth = socket_depth,
-	socket_clearance = 0.006,
+	socket_clearance = socket_clearance,
 	followthrough = 0.01
 )
 {
