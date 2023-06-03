@@ -10,12 +10,14 @@ OPENSCAD_FLAGS =
 .scad.png:
 	$(OPENSCAD) --autocenter --viewall $(OPENSCAD_FLAGS) -o $@ $<
 
-models: xcelite-99-blade-case.stl xcelite-99-blade-case-cap.stl
-previews: xcelite-99-blade-case.png xcelite-99-blade-case-cap.png assembly.png
+models: xcelite-99-blade-case.stl xcelite-99-blade-case-cap.stl handle.stl
+previews: xcelite-99-blade-case.png xcelite-99-blade-case-cap.png assembly.png \
+          handle.png
 
 clean:
 	rm -f xcelite-99-blade-case.stl xcelite-99-blade-case-cap.stl \
-	      xcelite-99-blade-case.png xcelite-99-blade-case-cap.png assembly.png
+	      handle.stl xcelite-99-blade-case.png \
+	      xcelite-99-blade-case-cap.png assembly.png handle.png
 
 help:
 	@echo "available targets: models, previews, clean"
