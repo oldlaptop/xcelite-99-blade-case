@@ -18,7 +18,7 @@ include <MCAD/constants.scad>
 
 no_blades = 6;
 blade_base_dia = 0.280;
-blade_wingspan = 0.410; // See xcelite-99-blade-case.scad
+blade_wingspan = 0.43; // See xcelite-99-blade-case.scad
 blade_wing_thickness = 0.110;
 blade_angle = 90; // 0 for minimum depth, 90 for minimum width
 blade_overall_length = 5;
